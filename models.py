@@ -39,6 +39,8 @@ class Product(Base):
     price = Column(Float, nullable=False)
     category_id = Column(Integer, ForeignKey('categories.id'))
     category = relationship("Category", back_populates="products")
+    orders = relationship('Order', back_populates='product')
+
 
     def __repr__(self):
         return self.name
