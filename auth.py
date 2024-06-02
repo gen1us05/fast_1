@@ -1,17 +1,17 @@
 import os
-from fastapi import APIRouter
+from fastapi import HTTPException, status, Response, APIRouter, Security
 from database import session, ENGINE
 from werkzeug import security
 from models import User
 from schemas import RegisterModel, LoginModel
-from fastapi import HTTPException, status, Response
-from fastapi.encoders import jsonable_encoder
-from fastapi import JwtAuthorizationCredentials, JwtAccessBearer
+# from fastapi.encoders import jsonable_encoder
+# from fastapi import JwtAuthorizationCredentials, JwtAccessBearer
+from fastapi_jwt import JwtAuthorizationCredentials, JwtAccessBearer
 from dotenv import load_dotenv
 load_dotenv()
 
 
-acces_security = JwtAccessBearer(secret_key=os.getenv("secret_key"), auto_error=True)
+access_security = JwtAccessBearer(secret_key=os.getenv("secret_key"), auto_error=True)
 
 session = session(bind=ENGINE)
 
